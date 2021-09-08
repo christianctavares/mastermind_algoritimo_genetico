@@ -73,12 +73,12 @@ def robo():
         newGen = []
         #mudar popu
         for _ in range(60):
-            e1 = random.choice(elements) #* random.uniform(0.99, 1.01)
-            e2 = random.choice(elements) #* random.uniform(0.99, 1.01)
-            e3 = random.choice(elements) #* random.uniform(0.99, 1.01)
-            e4 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_1 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_2 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_3 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_4 = random.choice(elements) #* random.uniform(0.99, 1.01)
 
-            newGen.append([e1,e2,e3,e4])
+            newGen.append([e_1,e_2,e_3,e_4])
         solutions = newGen
         for s in solutions:
             rankedsolutions.append([fitness(s, TOGUESS), s])
@@ -86,12 +86,12 @@ def robo():
 
 def game(tentativa):
 
-    if(tentativa == senha):
+    if tentativa == senha:
         print("==== Você acertou em 1 tentativa ====")
     else:
         rodada = 0
         
-        while(tentativa != senha):
+        while tentativa != senha:
             rodada += 1
             count =  0
 
@@ -107,14 +107,14 @@ def game(tentativa):
                 else:
                     continue
             
-            if (count < 4) and (count != 0):  
+            if count < 4 and count != 0:  
                 print("Você não achou a sequência, mas encontrou", count, "digito(s) corretos")
                 print("Números corretos:")
                 for k in acertos:
                     print(k, end=' ')
                 print('\n')
                 tentativa = robo()
-            elif (count == 0):  
+            elif count == 0:  
                 print("Nenhum dos números escolhidos eram corretos")
                 tentativa = robo()
 
