@@ -10,8 +10,6 @@ Genome = List[int]
 Population = List[Genome]
 WEIGHT_BLACK = 5 
 WEIGHT_WHITE = 3 
-global tentativa
-tentativa = []
 
 def robo():
     def generate_genome(length: int) -> Genome:
@@ -39,7 +37,7 @@ def robo():
             elements.append(s[1][1])
             elements.append(s[1][2])
             elements.append(s[1][3])
-        newGen = []
+        new_gen = []
         #mudar popu
         for j in range(60):
             e_1 = random.choice(elements) #* random.uniform(0.99, 1.01)
@@ -47,8 +45,8 @@ def robo():
             e_3 = random.choice(elements) #* random.uniform(0.99, 1.01)
             e_4 = random.choice(elements) #* random.uniform(0.99, 1.01)
 
-            newGen.append([e_1,e_2,e_3,e_4])
-        return newGen
+            new_gen.append([e_1,e_2,e_3,e_4])
+        return new_gen
     
     popu = generate_population(60, 4)
     solutions = []
