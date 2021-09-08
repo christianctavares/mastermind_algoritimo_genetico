@@ -49,12 +49,11 @@ def robo():
     for i in popu:
         rankedsolutions = []
         for s in solutions:
-            #rankedsolutions.append((fitness(s, TOGUESS)))
             rankedsolutions.append([fitness(s, TOGUESS), s])
-    #rint(rankedsolutions)
         rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
+        print(f"--- Genoma {i[0]} best solution === ")
+        print(rankedsolutions[0])
 
-        #print(rankedsolutions[0])
         if rankedsolutions[0][0] >16:
             tentativa = rankedsolutions[0][1]
             print("TENTATIVA: ", tentativa)
@@ -62,10 +61,9 @@ def robo():
             return tentativa
             break
 
-        #print(f"--- Get {rankedsolutions[0][0]} best solution --- ")
         #mudar popu
         bestsolutions = rankedsolutions[:19]
-        #print(bestsolutions)
+
         elements = []
         for s in bestsolutions:
             elements.append(s[1][0])
@@ -86,38 +84,45 @@ def robo():
             rankedsolutions.append([fitness(s, TOGUESS), s])
         rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
 
-tentativa = robo()
-if(tentativa == senha):
-    print("==== Você acertou em 1 tentativa ====")
-else:
-    rodada = 0
-    
-    while(tentativa != senha):
-        rodada += 1
-        count =  0
+def game(tentativa):
 
-
-        acertos = ['X','X','X','X']
-
-        for i in range(0, 4):
-            # print("Tentativa:",tentativa)
-            # print("Senha",senha)
-            if(tentativa[i] == senha[i]):
-                count += 1
-                acertos[i] = tentativa[i]
-            else:
-                continue
+    if(tentativa == senha):
+        print("==== Você acertou em 1 tentativa ====")
+    else:
+        rodada = 0
         
-        if (count < 4) and (count != 0):  
-            print("Você não achou a sequência, mas encontrou", count, "digito(s) corretos")
-            print("Números corretos:")
-            for k in acertos:
-                print(k, end=' ')
-            print('\n')
-            tentativa = robo()
-        elif (count == 0):  
-            print("Nenhum dos números escolhidos eram corretos")
-            tentativa = robo()
+        while(tentativa != senha):
+            rodada += 1
+            count =  0
 
-    if tentativa == senha:  
-        print("==== Você acertou em", rodada,"tentativa ====")
+
+            acertos = ['X','X','X','X']
+
+            for i in range(0, 4):
+                # print("Tentativa:",tentativa)
+                # print("Senha",senha)
+                if(tentativa[i] == senha[i]):
+                    count += 1
+                    acertos[i] = tentativa[i]
+                else:
+                    continue
+            
+            if (count < 4) and (count != 0):  
+                print("Você não achou a sequência, mas encontrou", count, "digito(s) corretos")
+                print("Números corretos:")
+                for k in acertos:
+                    print(k, end=' ')
+                print('\n')
+                tentativa = robo()
+            elif (count == 0):  
+                print("Nenhum dos números escolhidos eram corretos")
+                tentativa = robo()
+
+        if tentativa == senha:  
+            print("==== Você acertou em", rodada,"tentativa ====")
+
+def jogar():
+    tentativa = robo()
+    game(tentativa)
+
+jogar()
