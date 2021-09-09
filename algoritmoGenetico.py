@@ -4,12 +4,17 @@ from operator import itemgetter
 import random 
 
 TOGUESS = [random.randint(1, 6),random.randint(1, 6),random.randint(1, 6),random.randint(1, 6)]
-print(TOGUESS)
+print()
+print("SENHA GERADA: ", TOGUESS)
 
 Genome = List[int]
 Population = List[Genome]
 WEIGHT_BLACK = 5 
 WEIGHT_WHITE = 3 
+
+class bcolors:
+    OKGREEN = '\033[92m'
+    FAIL = '\033[91m'
 
 def robo():
     def generate_genome(length: int) -> Genome:
@@ -58,13 +63,13 @@ def robo():
         for s in solutions:
             rankedsolutions.append([fitness(s, TOGUESS), s])
         rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
-        print(f"--- Genoma {i[0]} best solution === ")
-        print(rankedsolutions[0])
+        #print(f"--- Genoma {i[0]} best solution === ")
+        #print(rankedsolutions[0])
 
         if rankedsolutions[0][0] >16:
             tentativa = rankedsolutions[0][1]
-            print("TENTATIVA: ", tentativa)
-            print("SENHA: ",TOGUESS)
+            # print("TENTATIVA: ", tentativa)
+            # print("SENHA CORRETA: ",TOGUESS)
             return tentativa
 
         #mudar popu
@@ -76,13 +81,28 @@ def robo():
         rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
 
 def game(tentativa):
-
+    chances = 8
+    jogada = 1
     if tentativa == TOGUESS:
-        print("==== Você acertou em 1 tentativa ====")
+        print()
+        print(f"{jogada}° Jogada realizada: {tentativa}")
+        print()
+        print(bcolors.OKGREEN + "█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
+        print(bcolors.OKGREEN + "▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
+        print()
+        print("==== Você acertou de PRIMEIRA! Parabens ====")
+        print()
     else:
         rodada = 0
-        
+
         while tentativa != TOGUESS:
+            if chances == 0:
+                print()
+                print(bcolors.FAIL + "█▀▀ ▄▀█ █▀▄▀█ █▀▀   █▀█ █░█ █▀▀ █▀█")
+                print(bcolors.FAIL + "█▄█ █▀█ █░▀░█ ██▄   █▄█ ▀▄▀ ██▄ █▀▄")
+                print()
+                print("Acabou suas chances de acertar (╯°□°）╯︵ ┻━┻")            
+                return
             rodada += 1
             count =  0
 
@@ -97,18 +117,33 @@ def game(tentativa):
                     continue
             
             if count < 4 and count != 0:  
+                print(f"{jogada}° Jogada realizada: {tentativa}")
                 print("Você não achou a sequência, mas encontrou", count, "digito(s) corretos")
                 print("Números corretos:")
                 for k in acertos:
                     print(k, end=' ')
                 print('\n')
+                chances -= 1
+                jogada += 1
                 tentativa = robo()
-            elif count == 0:  
+            elif count == 0:
+                print(f"{jogada}° Jogada realizada: {tentativa}")
                 print("Nenhum dos números escolhidos eram corretos")
+                chances -= 1
+                jogada += 1
                 tentativa = robo()
 
         if tentativa == TOGUESS:  
-            print("==== Você acertou em", rodada," tentativa ====")
+            rodada += 1
+            chances -= 1
+            print(f"{jogada}° Jogada realizada: {tentativa}")
+            print("Você achou a sequência de digitos corretos!")
+            print()
+            print(bcolors.OKGREEN + "█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
+            print(bcolors.OKGREEN + "▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
+            print()
+            print("==== Você acertou em",rodada,"tentativa ====")
+            print()
 
 def jogar():
     tentativa = robo()
