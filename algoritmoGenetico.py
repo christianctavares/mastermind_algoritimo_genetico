@@ -12,6 +12,10 @@ Population = List[Genome]
 WEIGHT_BLACK = 5 
 WEIGHT_WHITE = 3 
 
+class bcolors:
+    OKGREEN = '\033[92m'
+    FAIL = '\033[91m'
+
 def robo():
     def generate_genome(length: int) -> Genome:
         return choices([1,2,3,4,5,6], k=length)
@@ -83,8 +87,8 @@ def game(tentativa):
         print()
         print(f"{jogada}° Jogada realizada: {tentativa}")
         print()
-        print("█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
-        print("▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
+        print(bcolors.OKGREEN + "█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
+        print(bcolors.OKGREEN + "▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
         print()
         print("==== Você acertou de PRIMEIRA! Parabens ====")
         print()
@@ -94,10 +98,10 @@ def game(tentativa):
         while tentativa != TOGUESS:
             if chances == 0:
                 print()
-                print("█▀▀ ▄▀█ █▀▄▀█ █▀▀   █▀█ █░█ █▀▀ █▀█")
-                print("█▄█ █▀█ █░▀░█ ██▄   █▄█ ▀▄▀ ██▄ █▀▄")
+                print(bcolors.FAIL + "█▀▀ ▄▀█ █▀▄▀█ █▀▀   █▀█ █░█ █▀▀ █▀█")
+                print(bcolors.FAIL + "█▄█ █▀█ █░▀░█ ██▄   █▄█ ▀▄▀ ██▄ █▀▄")
                 print()
-                print("Acabou suas chances de acertar =(")            
+                print("Acabou suas chances de acertar (╯°□°）╯︵ ┻━┻")            
                 return
             rodada += 1
             count =  0
@@ -135,8 +139,8 @@ def game(tentativa):
             print(f"{jogada}° Jogada realizada: {tentativa}")
             print("Você achou a sequência de digitos corretos!")
             print()
-            print("█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
-            print("▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
+            print(bcolors.OKGREEN + "█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
+            print(bcolors.OKGREEN + "▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
             print()
             print("==== Você acertou em",rodada,"tentativa ====")
             print()
