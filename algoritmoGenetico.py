@@ -4,6 +4,7 @@ from operator import itemgetter
 import random 
 
 TOGUESS = [random.randint(1, 6),random.randint(1, 6),random.randint(1, 6),random.randint(1, 6)]
+print()
 print("SENHA GERADA: ", TOGUESS)
 
 Genome = List[int]
@@ -79,13 +80,20 @@ def game(tentativa):
     chances = 8
     jogada = 1
     if tentativa == TOGUESS:
+        print()
         print(f"{jogada}° Jogada realizada: {tentativa}")
+        print()
+        print("█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
+        print("▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
+        print()
         print("==== Você acertou de PRIMEIRA! Parabens ====")
+        print()
     else:
         rodada = 0
 
         while tentativa != TOGUESS:
             if chances == 0:
+                print()
                 print("█▀▀ ▄▀█ █▀▄▀█ █▀▀   █▀█ █░█ █▀▀ █▀█")
                 print("█▄█ █▀█ █░▀░█ ██▄   █▄█ ▀▄▀ ██▄ █▀▄")
                 print()
@@ -125,8 +133,13 @@ def game(tentativa):
             rodada += 1
             chances -= 1
             print(f"{jogada}° Jogada realizada: {tentativa}")
-            print("Chances restantes: ", chances)
-            print("==== Você acertou em ",rodada," tentativa ====")
+            print("Você achou a sequência de digitos corretos!")
+            print()
+            print("█░█ █ ▀█▀ █▀█ █▀█ █ ▄▀█ █")
+            print("▀▄▀ █ ░█░ █▄█ █▀▄ █ █▀█ ▄")
+            print()
+            print("==== Você acertou em",rodada,"tentativa ====")
+            print()
 
 def jogar():
     tentativa = robo()
