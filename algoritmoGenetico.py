@@ -34,6 +34,12 @@ def robo():
         if value == 0:
             return 0
         return value
+    def ranked_func(solutions):
+        rankedsolutions = []
+        for s in solutions:
+            rankedsolutions.append([fitness(s, TOGUESS), s])
+        rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
+        return rankedsolutions
 
     def cross_mutate(bestsolutions):
         elements = []
@@ -57,28 +63,25 @@ def robo():
     solutions = []
     for s in popu:
         solutions.append(s)
-
+    count = 0
     for i in popu:
-        rankedsolutions = []
-        for s in solutions:
-            rankedsolutions.append([fitness(s, TOGUESS), s])
-        rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
+        count += 1
+        rankedsolutions = ranked_func(solutions)
         #print(f"--- Genoma {i[0]} best solution === ")
-        #print(rankedsolutions[0])
+        print(count, "RANKEDSOLITIOM: " ,rankedsolutions)
+        #mudar popu
+        bestsolutions = rankedsolutions[:19]
+        solutions = cross_mutate(bestsolutions)
+        
+        rankedsolutions = ranked_func(solutions)
+        count += 1
+        print(count, "RANKEDSOLITIOM: " ,rankedsolutions)
 
         if rankedsolutions[0][0] >16:
             tentativa = rankedsolutions[0][1]
             # print("TENTATIVA: ", tentativa)
             # print("SENHA CORRETA: ",TOGUESS)
             return tentativa
-
-        #mudar popu
-        bestsolutions = rankedsolutions[:19]
-        solutions = cross_mutate(bestsolutions)
-
-        for s in solutions:
-            rankedsolutions.append([fitness(s, TOGUESS), s])
-        rankedsolutions = sorted(rankedsolutions, key=itemgetter(0), reverse=True)
 
 def game(tentativa):
     chances = 8
