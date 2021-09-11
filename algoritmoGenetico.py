@@ -1,6 +1,7 @@
 from random import choices
 from typing import List
 from operator import itemgetter
+import sys
 import random
 
 Genome = List[int]
@@ -11,7 +12,7 @@ WEIGHT_BLACK = 5
 WEIGHT_WHITE = 3 
 CROSSOVER_PROBABILITY = 0.5
 MUTATION_PROBABILITY = 0.03
-TOGUESS = [random.randint(1, 6),random.randint(1, 6),random.randint(1, 6),random.randint(1, 6)]
+TOGUESS = []
 
 class bcolors:
     OKGREEN = '\033[92m'
@@ -170,5 +171,14 @@ def game(attempt):
             print()
 
 # MAIN #
-print(f"\nSENHA GERADA: {TOGUESS}\n")
+senha = []
+
+for i in range(1, 5):
+    valor = input(f'\nInsira o {i}º valor da senha: ')
+    while (valor.isnumeric() != True or int(valor) < 0 or int(valor) > 6):
+        print("O valor inserido deve ser númerico e entre 0 e 6\n")
+        valor = input(f'\nInsira novamente o {i}º valor da senha: ')
+    senha.append(int(valor))
+TOGUESS = senha
+print(f"\nSENHA escolhida: {TOGUESS}\n")
 game(ai())
