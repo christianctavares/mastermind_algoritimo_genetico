@@ -11,14 +11,18 @@ Population = List[Genome]
 # VARIABLE DECLARATION #
 WEIGHT_BLACK = 5 
 WEIGHT_WHITE = 3 
+<<<<<<< HEAD
 CROSSOVER_PROBABILITY = 0.5
 MUTATION_PROBABILITY = 0.03
 TOGUESS = []
+=======
+>>>>>>> 9accd38 (mais viadagem)
 
 class bcolors:
     OKGREEN = '\033[92m'
     FAIL = '\033[91m'
 
+<<<<<<< HEAD
 def generate_genome(length: int) -> Genome:
     return choices([1,2,3,4,5,6], k=length)
 
@@ -88,6 +92,45 @@ def cross_mutate(bestsolutions):
     return new_gen
 
 def ai():
+=======
+def robo():
+    def generate_genome(length: int) -> Genome:
+        return choices([1,2,3,4,5,6], k=length)
+
+    def generate_population(size: int, genome_lenght: int) -> Population:
+        return [generate_genome(genome_lenght) for _ in range(size)]
+
+    def fitness(genome: Genome, guess: TOGUESS):
+        value = 0 
+        for i, j in zip(genome, guess):
+
+                if i == j:
+                    value += WEIGHT_BLACK
+                elif i in guess:
+                    value += WEIGHT_WHITE
+        if value == 0:
+            return 0
+        return value
+
+    def cross_mutate(bestsolutions):
+        elements = []
+        for s in bestsolutions:
+            elements.append(s[1][0])
+            elements.append(s[1][1])
+            elements.append(s[1][2])
+            elements.append(s[1][3])
+        new_gen = []
+        #mudar popu
+        for j in range(60):
+            e_1 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_2 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_3 = random.choice(elements) #* random.uniform(0.99, 1.01)
+            e_4 = random.choice(elements) #* random.uniform(0.99, 1.01)
+
+            new_gen.append([e_1,e_2,e_3,e_4])
+        return new_gen
+    
+>>>>>>> 9accd38 (mais viadagem)
     popu = generate_population(60, 4)
     solutions = []
     for s in popu:
