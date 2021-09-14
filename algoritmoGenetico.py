@@ -3,6 +3,7 @@ from typing import List
 from operator import itemgetter
 import sys
 import random
+import numpy as np
 
 Genome = List[int]
 Population = List[Genome]
@@ -35,14 +36,10 @@ def fitness(genome: Genome, guess: TOGUESS):
         return 0
     return value
 
-def crossover(code1, code2):
-    newCode = []
-    for i in range(4):
-        if random.random() > CROSSOVER_PROBABILITY:
-            newCode.append(code1[i])
-        else:
-            newCode.append(code2[i])
-    return newCode
+def crossover(code1, code2, position):
+    new_code1 = np.append([code1[:position], code2[position:]])
+    new_code2 = np.append([code2[:position], code1[position:]])
+    return new_code1, new_code2
 
 def mutate(code):
     position = random.randint(0, 3)
