@@ -39,33 +39,6 @@ def fitness(genome: Genome, guess: TOGUESS):
         return 0
     return value
 
-def crossover(code1, code2):
-    new_code = []
-    for genoma in range(TAMANHO_DO_GENOMA):
-        if random.random() > CROSSOVER_PROBABILITY:
-            new_code.append(code1[genoma])
-        else:
-            new_code.append(code2[genoma])
-    return new_code
-
-def mutate(code):
-    position = random.randint(0, 3)
-    new_value = random.randint(1, 6)
-    code[position] = new_value
-    return code
-
-def new_population(parents):
-    sons = []
-    for i in range(len(parents)):
-        if i == len(parents) - 1:
-            sons.append(parents[i])
-            break
-        son = crossover(parents[i], parents[i+1])
-        if random.random() <= MUTATION_PROBABILITY:
-            son = mutate(son)     
-        sons.append(son)
-    return sons
-
 def ranked_func(solutions):
     rankedsolutions = []
     for solution in solutions:
